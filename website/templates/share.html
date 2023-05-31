@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>Поширений запис</h1>
+
+  <p>ID запису: {{ record.id }}</p>
+  <p>Запитання: {{ record.question }}</p>
+  <p>Відповідь на код: {{ record.code_answer }}</p>
+  <p>Мова програмування: {{ record.language }}</p>
+
+  <h2>Посилання для поширення</h2>
+  <p>Поділіться цим посиланням з іншими:</p>
+  <p><a href="{{ share_url }}">Перейти до поширеного запису</a></p>
+
+  <button onclick="copyToClipboard('{{ share_url }}')">Копіювати посилання</button>
+
+  <script>
+    function copyToClipboard(text) {
+      const el = document.createElement('textarea');
+      el.value = text;
+      document.body.appendChild(el);
+      el.select();
+      document.execCommand('copy');
+      document.body.removeChild(el);
+      alert('Посилання скопійовано до буфера обміну!');
+    }
+  </script>
+{% endblock %}
