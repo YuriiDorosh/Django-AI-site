@@ -6,8 +6,16 @@
 # from .forms import SignUpForm
 # from .models import Code
 #
+# from dotenv import load_dotenv
+# import os
+#
+# # Завантажте змінні середовища з файлу .env
+# load_dotenv()
 #
 # # Create your views here.
+#
+# KEY = os.getenv('API_KEY')
+#
 #
 # def home(request):
 #     lang_list = ['c', 'clike', 'cpp', 'csharp', 'css', 'dart', 'django', 'go', 'html', 'java', 'javascript', 'markup',
@@ -24,7 +32,7 @@
 #             return render(request, 'home.html', {'lang_list': lang_list, 'code': code, 'lang': lang})
 #         else:
 #             # OpenAI ключ
-#             openai.api_key = "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"
+#             openai.api_key = KEY
 #             # OpenAI екземпляр
 #             openai.Model.list()
 #             # Запит до OpenAI
@@ -68,7 +76,7 @@
 #             return render(request, 'suggest.html', {'lang_list': lang_list, 'code': code, 'lang': lang})
 #         else:
 #             # OpenAI ключ
-#             openai.api_key = "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"
+#             openai.api_key = KEY
 #             # OpenAI екземпляр
 #             openai.Model.list()
 #             # Запит до OpenAI
@@ -151,6 +159,7 @@
 #     past.delete()
 #     messages.success(request, "Успішно видалено")
 #     return redirect('past')
+
 
 """
 Вюхи на класах
@@ -301,6 +310,7 @@
 #         messages.success(request, "Успішно видалено")
 #         return redirect('past')
 
+"""                     MAIN                    """
 
 import openai
 from django.shortcuts import render, redirect
@@ -310,6 +320,15 @@ from django.contrib.auth.forms import UserCreationForm
 from .forms import SignUpForm
 from .models import Code
 
+from dotenv import load_dotenv
+import os
+
+# Завантажте змінні середовища з файлу .env
+load_dotenv()
+
+# Create your views here.
+
+KEY = os.getenv('API_KEY')
 # Create your views here.
 
 LANGUAGES = [
@@ -321,7 +340,7 @@ LANGUAGES = [
 
 
 def get_openai_response(code, lang, prompt):
-    openai.api_key = "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"
+    openai.api_key = KEY
     openai.Model.list()
 
     try:
