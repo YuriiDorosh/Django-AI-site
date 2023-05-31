@@ -255,7 +255,7 @@ def explain_code(request):
         if error_response:
             return error_response
 
-        prompt = f"Поясни наступний {lang} код: \n {code} \n після кожного 10 слова в поясненні став знак нового рядка"
+        prompt = f"Поясни наступний {lang} код: \n {code}"
         return process_request(request, 'explain.html', prompt, code, lang)
 
     return render(request, 'explain.html', {'lang_list': LANGUAGES})
@@ -322,6 +322,15 @@ def delete_past(request, Past_id):
     past = Code.objects.get(pk=Past_id)
     past.delete()
     messages.success(request, "Успішно видалено")
+    return redirect('past')
+
+
+def delete_all_past(request):
+    if request.user.is_authenticated:
+        Code.objects.filter(user_id=request.user.id).delete()
+        messages.success(request, "Успішно видалено всю історію")
+    else:
+        messages.success(request, "Ви маєте бути авторизованим, щоб видалити історію")
     return redirect('past')
 
 
