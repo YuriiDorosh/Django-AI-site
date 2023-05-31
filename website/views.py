@@ -279,7 +279,7 @@ def login_user(request):
             messages.success(request, "Ви увійшли у систему.")
             return redirect('welcome')
         else:
-            messages.success(request, "Помилка входу. Будь ласка спробуйте ще раз...")
+            messages.success(request, "Помилка входу. Будь ласка, спробуйте ще раз...")
             return redirect('home')
     else:
         return render(request, 'home.html', {})
