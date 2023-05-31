@@ -160,6 +160,8 @@ from .models import Code
 import os
 import openai
 
+from django.urls import reverse
+
 # Load environment variables from .env file
 load_dotenv()
 
@@ -203,7 +205,12 @@ def process_request(request, template_name, prompt, code, lang, explain=False):
         record = Code(question=code, code_answer=response, language=lang, user=request.user)
         record.save()
 
-        return render(request, template_name, {'lang_list': LANGUAGES, 'response': response, 'lang': lang})
+        share_url = request.build_absolute_uri(reverse('share', args=[record.id]))
+
+        # return render(request, template_name, {'lang_list': LANGUAGES, 'response': response, 'lang': lang})
+        return render(request, template_name,
+                      {'lang_list': LANGUAGES, 'response': response, 'lang': lang, 'share_url': share_url})
+
 
     except Exception as e:
         return render(request, template_name, {'lang_list': LANGUAGES, 'response': e, 'lang': lang})
@@ -252,6 +259,14 @@ def explain_code(request):
         return process_request(request, 'explain.html', prompt, code, lang)
 
     return render(request, 'explain.html', {'lang_list': LANGUAGES})
+
+
+def share(request, record_id):
+    record = Code.objects.get(pk=record_id)
+
+    share_url = request.build_absolute_uri(reverse('share', args=[record_id]))
+
+    return render(request, 'share.html', {'record': record, 'share_url': share_url})
 
 
 def login_user(request):
