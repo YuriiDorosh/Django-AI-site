@@ -37,9 +37,14 @@
 
 
 <pre>
-<code class="line-numbers language-python">
+<code class="line-numbers language-c">
 
-print("Hello World!!!!!")
+unsigned long long factorial(unsigned int n) {
+    if (n <= 1) {
+        return 1;
+    }
+    return n * factorial(n - 1);
+}
 
 </code>
 </pre>
