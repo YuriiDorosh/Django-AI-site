@@ -277,7 +277,7 @@ def login_user(request):
         if user is not None:
             login(request, user)
             messages.success(request, "Ви увійшли у систему.")
-            return redirect('home')
+            return redirect('welcome')
         else:
             messages.success(request, "Помилка входу. Будь ласка спробуйте ще раз...")
             return redirect('home')
@@ -301,7 +301,7 @@ def register_user(request):
             user = authenticate(username=username, password=password)
             login(request, user)
             messages.success(request, "Ви зареєструвалися!  ")
-            return redirect('home')
+            return redirect('welcome')
 
     else:
         form = SignUpForm()
@@ -323,3 +323,7 @@ def delete_past(request, Past_id):
     past.delete()
     messages.success(request, "Успішно видалено")
     return redirect('past')
+
+
+def welcome(request):
+    return render(request, 'welcome.html')
