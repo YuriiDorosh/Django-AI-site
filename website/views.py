@@ -182,7 +182,8 @@ def check_language(request, lang, code):
     return None
 
 
-def process_request(request, template_name, prompt, code, lang):
+# def process_request(request, template_name, prompt, code, lang):
+def process_request(request, template_name, prompt, code, lang, explain=False):
     try:
         openai.api_key = KEY
         response = openai.Completion.create(
@@ -194,6 +195,9 @@ def process_request(request, template_name, prompt, code, lang):
             frequency_penalty=0.0,
             presence_penalty=0.0,
         )
+        if explain:
+            response = response.replace('\n', '<br>')
+
         response = response.choices[0].text.strip()
 
         record = Code(question=code, code_answer=response, language=lang, user=request.user)
@@ -233,6 +237,21 @@ def suggest(request):
         return process_request(request, 'suggest.html', prompt, code, lang)
 
     return render(request, 'suggest.html', {'lang_list': LANGUAGES})
+
+
+def explain_code(request):
+    if request.method == "POST":
+        code = request.POST.get('code')
+        lang = request.POST.get('lang')
+
+        error_response = check_language(request, lang, code)
+        if error_response:
+            return error_response
+
+        prompt = f"Поясни наступний {lang} код: \n {code} \n після кожного 10 слова в поясненні став знак нового рядка"
+        return process_request(request, 'explain.html', prompt, code, lang)
+
+    return render(request, 'explain.html', {'lang_list': LANGUAGES})
 
 
 def login_user(request):
