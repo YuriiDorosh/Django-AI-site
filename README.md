@@ -25,7 +25,6 @@ Create a .env file in the project directory and define the required environment 
 ```bash
 API_KEY='Your OpenAI API Key'
 SECRET_KEY='Your Django Secret Key'
-DEBUG=True
 DB_NAME='Your Database Name'
 DB_USER='Your Database User'
 DB_PASSWORD='Your Database Password'
