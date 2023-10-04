@@ -1,6 +1,7 @@
 import os
 
 import openai
+from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import redirect, render
@@ -12,38 +13,9 @@ from .models import Code
 
 load_dotenv()
 
+KEY = settings.KEY
 
-KEY = os.getenv("API_KEY")
-
-LANGUAGES = [
-    "c",
-    "clike",
-    "cpp",
-    "csharp",
-    "css",
-    "dart",
-    "django",
-    "go",
-    "html",
-    "java",
-    "javascript",
-    "markup",
-    "markup-templating",
-    "matlab",
-    "objectivec",
-    "perl",
-    "php",
-    "powershell",
-    "python",
-    "r",
-    "regex",
-    "ruby",
-    "rust",
-    "sass",
-    "sql",
-    "swift",
-    "typescript",
-]
+LANGUAGES = settings.SELECTED_LANGUAGES
 
 
 def check_language(request, lang, code):
