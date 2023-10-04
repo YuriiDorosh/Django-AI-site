@@ -3,7 +3,6 @@ import os
 import openai
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
-from django.contrib.auth.forms import UserCreationForm
 from django.shortcuts import redirect, render
 from django.urls import reverse
 from dotenv import load_dotenv
