@@ -1,98 +1,90 @@
-<div align="center">
-
-
-
-</div>
-
-## Chatty A.I.
+# Running the Django-AI-site Project 
 
 ![home_page](home_page.png)
 
+## Clone the Repository
 
-### Cloning the repository
-
---> Clone the repository using the command below :
+First, clone the project repository from GitHub:
 
 ```bash
 git clone https://github.com/YuriiDorosh/Django-AI-site.git
-
 ```
 
---> Move into the directory where we have the project files :
+## Navigate to the Project Directory
+
+Navigate to the project directory that you just cloned:
 
 ```bash
 cd Django-AI-site
-
 ```
 
---> Create a virtual environment :
+## Create a .env File
+
+Create a .env file in the project directory and define the required environment variables. You can use a text editor to create and edit the file. Here's an example of the contents of the .env file:
 
 ```bash
-# Let's install virtualenv first
-pip install virtualenv
-
-# Then we create our virtual environment
-virtualenv venv
-
+API_KEY='Your OpenAI API Key'
+SECRET_KEY='Your Django Secret Key'
+DEBUG=True
+DB_NAME='Your Database Name'
+DB_USER='Your Database User'
+DB_PASSWORD='Your Database Password'
+DB_HOST='db'
 ```
 
---> Activate the virtual environment :
+Replace the placeholders with your actual API key, secret key, database information, and any other required settings.
+
+## 1. Running the Project Locally
+
+Create a virtual environment (if not already created) and install project dependencies:
 
 ```bash
-# Windows
-venv\scripts\activate
-# Linux
-source venv/bin/activate
-
+python3 -m venv venv  # Create a virtual environment
+source venv/bin/activate  # Activate the virtual environment (Linux)
+pip install -r requirements.txt  # Install project dependencies
 ```
 
---> Install the requirements :
-
-```bash
-pip install -r requirements.txt
-```
-
-### Set the project:
-
---> Create a file named .env in the root of the project 
-and specify the necessary environment variables:
-
-```bash
-API_KEY = 'Your key' # The key from https://openai.com
-SECRET_KEY = 'Django key'
-
-```
-
-### Apply migrations to the database:
-```bash
-python manage.py migrate
-
-```
-
-
-### Running the App
-
---> To run the App, we use :
+Run the Django development server:
 ```bash
 python manage.py runserver
-
 ```
 
-Open a web browser and go to http://localhost:8000/ to view the site.
+## 2. Running the Project with Docker
+
+### Prerequisites
+
+Make sure you have the following prerequisites installed on your computer:
+
+- Docker: [Install Docker](https://docs.docker.com/get-docker/)
+- Docker Compose: [Install Docker Compose](https://docs.docker.com/compose/install/)
 
 
-## Using
+Build and start the project containers using Docker Compose and the Makefile:
 
+```bash
+make docker-up
+```
 
-On the main page, you can select a programming language and enter a code to get its patch.
+Access the project in your web browser at http://localhost:8000/.
 
-In the "Previous codes" section, you can view the history of entered codes and their corrections.
+To stop the project and containers, you can use:
 
-In the "Code explanation" section, you can enter the code and get an explanation of its operation.
+```bash
+make docker-down
+```
 
-### Making contributions
-If you want to contribute to the project, please create a separate branch and submit a pull request with your suggestions.
+## 3. Running the Project with Makefile (without Docker)
 
-### The authors
+Run the Django development server using the Makefile:
 
-Me :)
+```bash
+make run
+```
+
+## Issues and Contributions
+
+If you encounter any issues or have suggestions for improvements, feel free to open an issue on this GitHub repository. We welcome contributions from the community. If you'd like to contribute code, please create a pull request.
+
+## License
+
+This project is licensed under the MIT License. You can find the license details in the [LICENSE](LICENSE) file. Feel free to use, modify, and distribute the code as per the terms of the MIT License.
