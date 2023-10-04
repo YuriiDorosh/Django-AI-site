@@ -1,0 +1,24 @@
+[tool.black]
+line-length = 120  # Default is 88
+target-version = ['py36', 'py37', 'py38']  # Specify Python versions
+include = '\.pyi?$'  # Regular expression of files to include in formatting
+exclude = '''(
+/(
+    \.git
+  | \.mypy_cache
+  | \.tox
+  | \.venv
+  | _build
+  | buck-out
+  | venv
+  | env
+  | my-venv
+  | my_venv
+  | my_env
+  | virtual_env
+  | v_env
+  | .env
+  | build
+  | dist
+)/
+)'''
