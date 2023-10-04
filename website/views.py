@@ -1,17 +1,12 @@
-import os
-
 import openai
 from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import redirect, render
 from django.urls import reverse
-from dotenv import load_dotenv
 
-from .forms import SignUpForm
-from .models import Code
-
-load_dotenv()
+from website.forms import SignUpForm
+from website.models import Code
 
 KEY = settings.KEY
 
