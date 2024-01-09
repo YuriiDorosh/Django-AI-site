@@ -15,6 +15,7 @@ services:
   web:
     build: .
     command: python3 manage.py runserver 0.0.0.0:8000
+    restart: unless-stopped
     volumes:
       - .:/app
     ports:
@@ -22,5 +23,13 @@ services:
     depends_on:
       - db
 
+  migration:
+    build: .
+    command: python3 manage.py migrate
+    restart: on-failure
+    volumes:
+      - .:/app
+    depends_on:
+      - db
 volumes:
   postgres_data:

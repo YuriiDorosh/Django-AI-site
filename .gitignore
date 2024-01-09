@@ -865,3 +865,6 @@ static
 media
 media/
 media/*
+
+personal_README.md
+/k8s/chart/values-example.yaml
