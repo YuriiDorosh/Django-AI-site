@@ -1,0 +1,33 @@
+# Ignore common development and version control files
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+db.sqlite3
+*.log
+dev-requirements.txt
+
+# Ignore editor and IDE files
+.vscode/
+.idea/
+
+# Ignore local development settings
+*.env
+*.env.*
+*.env.local
+*.env.*.local
+
+# Ignore migration files if they are generated during development
+/migrations/
+
+# Ignore static and media files that are generated during development
+/static/
+/media/
+
+# Ignore Docker-specific files
+.dockerignore
+Dockerfile*
+docker-compose*
+
+# Ignore README in home directory
+*.md
